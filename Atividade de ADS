@@ -1,0 +1,57 @@
+<html lg="pt-br">
+<heard>
+    <meta charset="utf-8">
+    <meta name="viewport" concent="width=device-width, initial-scale=1">
+    <title>Perfil Profissional - Victor Hugo</title>
+    <meta name="descripition" content="Perfil Profissional de Victor Hugo.">
+</heard>
+<body>
+<header>
+    <h1> Victor <span>Hugo</span></h1>
+    <p>ADS-Analise e Desenvolvimento de Sistema</p>
+    </header>
+
+    <main>
+        <section arial-labelledby="foto-perfil"></section>
+            <h2 id="foto de perfil">Foto de perfil</h2>
+            <figure>
+                <img src="WhatsApp Image 2025-08-18 at 23.14.14.jpeg" alt="Foto de Nome Sobrenome sorrido" width="180" height="180">
+                <figcaption>Victor Hugo</figcaption>
+            </figure>
+        </section>
+
+        <section aria-labelledby="contatos">
+            <h2 id="contatos">Contatos</h2>
+            <u1>
+            <li><strong>E-mail:</strong> <a href="mailo: seuemail@exemplo.com">vh701056@gmail.com</a></li>
+        <li><strong>Telefone:</strong> <a href="tel:(99) 99999-9999">tel:(86) 99835-5093</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/seuusuario">https://github.com/vh701056-oss</a></li>
+        <li><strong>Usuario do GitHub:</strong> vh701056-oss</li>
+        <li><strong>Rede social:</strong> <a href="https://www.linkedin.com/in/seuusuario">https://www.instagram.com/hugo.flyy?igsh=dTY5ODk1dWJieTZ0</a></li>
+      </ul>
+        </section>
+
+         <section aria-labelledby="resumo">
+      <h2 id="resumo">Resumo profissional</h2>
+      <p>
+        Profissional com experiência em Tecnologia, mais na area de Manutenção, atualmente aprendendo o Básico de ADS. Cada dia aprendendo mais sobre ADS/Informática de forma geral"
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Ultima atualizcao: <time datetime="2025-08-15">19 de agosto de 2025</time></p>
+  </footer>
+</body>
+</html>
+    </main>
+
+
+
+
+
+</body>
+
+
+
+</html>  
