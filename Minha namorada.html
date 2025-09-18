@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Minha Mulher - Dedicação</title>
+  <style>
+    :root{
+      --bg1:#4b006e;
+      --bg2:#5b2bff;
+      --card:#ffffffee;
+      --accent:#ff6b9a;
+      --glass: rgba(255,255,255,0.06);
+      --shadow: 0 8px 24px rgba(20,20,40,0.45);
+      --radius:18px;
+      font-family: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:#111;
+    }
+    .container{
+      width:min(920px,94%);background:linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03));
+      backdrop-filter: blur(8px);
+      border-radius:24px;padding:28px;box-shadow:var(--shadow);display:grid;grid-template-columns:320px 1fr;gap:22px;align-items:center;
+    }
+    .photo-frame{
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      padding:12px;border-radius:16px;border:1px solid rgba(255,255,255,0.06);
+      display:flex;flex-direction:column;align-items:center;gap:12px;justify-content:center;
+    }
+    #photo{width:100%;height:320px;object-fit:cover;border-radius:12px;border:4px solid rgba(255,255,255,0.04);}
+    .file-row{display:flex;gap:10px;width:100%}
+    .btn{display:inline-block;padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:600}
+    .btn-pick{background:linear-gradient(90deg,var(--accent),#ff957c);color:white}
+    .btn-show{background:transparent;border:2px solid rgba(255,255,255,0.08);color:white}
+    .info{padding:6px 8px;border-radius:10px;background:linear-gradient(90deg,rgba(0,0,0,0.2),rgba(255,255,255,0.02));color:white;text-align:center;font-weight:600}
+    .content{padding:6px 10px}
+    h1{margin:0;color:white;font-size:28px}
+    p.lead{margin:8px 0 18px;color:rgba(255,255,255,0.9)}
+    .chips{display:flex;flex-wrap:wrap;gap:10px}
+    .chip{background:rgba(255,255,255,0.08);color:white;padding:8px 12px;border-radius:999px;cursor:pointer;border:1px solid rgba(255,255,255,0.04);font-weight:700}
+    .chip.selected{transform:scale(1.03);box-shadow:0 6px 18px rgba(0,0,0,0.35)}
+    .panel-compliments{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(10,10,20,0.08);}
+    .compliment{font-size:18px;font-weight:700;color:#222;margin:8px 0}
+    .small{font-size:13px;color:#555;margin-top:6px}
+    .center{display:flex;align-items:center;justify-content:center}
+    /* modal */
+    .overlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.6));display:none;align-items:center;justify-content:center;padding:20px}
+    .modal{background:white;border-radius:16px;padding:22px;max-width:720px;width:100%;}
+    .modal h2{margin:0 0 8px}
+    .heart{width:42px;height:42px;border-radius:50%;display:inline-grid;place-items:center;background:linear-gradient(180deg,#ff6b9a,#ff3d7a);color:white;font-weight:800}
+    footer{margin-top:14px;color:rgba(0,0,0,0.55);font-size:13px}
+    @media(max-width:820px){.container{grid-template-columns:1fr;}.photo-frame img{height:260px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="photo-frame">
+      <img id="photo" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=60" alt="Sua foto aqui" />
+      <div class="file-row">
+        <label class="btn btn-pick" for="fileInput">Escolher foto</label>
+        <input id="fileInput" type="file" accept="image/*" style="display:none" />
+        <button id="showBtn" class="btn btn-show">Mostrar elogios</button>
+      </div>
+      <div class="info">Dica: clique em "Escolher foto" e selecione a foto da sua namorada</div>
+    </div>
+
+    <div class="content">
+      <h1>Para a minha mulher</h1>
+      <p class="lead">Um cantinho só pra mostrar o quanto ela é especial. Clique nos tópicos abaixo ou em "Mostrar elogios" para ver as mensagens.</p>
+
+      <div class="chips" id="chips">
+        <div class="chip" data-key="linda">Linda</div>
+        <div class="chip" data-key="perfeita">Perfeita</div>
+        <div class="chip" data-key="maravilhosa">Maravilhosa</div>
+        <div class="chip" data-key="gostosa">Gostosa</div>
+        <div class="chip" data-key="minhaMulher">Minha mulher</div>
+        <div class="chip" data-key="minhaPrincesa">Minha princesa</div>
+        <div class="chip" data-key="mulherFilhos">Mulher dos meus filhos</div>
+      </div>
+
+      <div class="panel-compliments" id="panel">
+        <!-- cards serão preenchidos por JS -->
+      </div>
+
+      <footer>Feito com ❤️</footer>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="heart">❤</div>
+        <h2 id="modalTitle">Elogios</h2>
+      </div>
+      <div id="modalBody" style="margin-top:12px">
+        <!-- texto dos elogios -->
+      </div>
+      <div style="margin-top:14px;text-align:right">
+        <button id="closeModal" class="btn btn-show">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const compliments = {
+      linda: 'Você é linda — seu sorriso ilumina meu dia.',
+      perfeita: 'Perfeita: em cada detalhe, você me encanta.',
+      maravilhosa: 'Maravilhosa: sua presença é conforto e alegria.',
+      gostosa: 'Gostosa e irresistível — meu desejo e admiração.',
+      minhaMulher: 'Minha mulher: parceira, amiga e amor da minha vida.',
+      minhaPrincesa: 'Minha princesa: a dona do meu coração.',
+      mulherFilhos: 'Mulher dos meus filhos: comigo pra sempre, construindo família.'
+    };
+
+    const chips = document.querySelectorAll('.chip');
+    const panel = document.getElementById('panel');
+    const overlay = document.getElementById('overlay');
+    const modalBody = document.getElementById('modalBody');
+    const modalTitle = document.getElementById('modalTitle');
+
+    // preencher cards iniciais
+    function showSelected(key){
+      panel.innerHTML = '';
+      const card = document.createElement('div');
+      card.className = 'card';
+      const text = document.createElement('div');
+      text.className = 'compliment';
+      text.textContent = compliments[key] || '';
+      const small = document.createElement('div');
+      small.className = 'small';
+      small.textContent = 'Clique em "Mostrar elogios" para ver todos.';
+      card.appendChild(text);card.appendChild(small);panel.appendChild(card);
+    }
+
+    chips.forEach(chip =>{
+      chip.addEventListener('click', ()=>{
+        chips.forEach(c=>c.classList.remove('selected'));
+        chip.classList.add('selected');
+        const k = chip.dataset.key;
+        showSelected(k);
+      })
+    });
+
+    // file input
+    const fileInput = document.getElementById('fileInput');
+    const photo = document.getElementById('photo');
+    fileInput.addEventListener('change', (e)=>{
+      const f = e.target.files && e.target.files[0];
+      if(!f) return;
+      const url = URL.createObjectURL(f);
+      photo.src = url;
+    });
+
+    // modal show all compliments
+    document.getElementById('showBtn').addEventListener('click', ()=>{
+      modalTitle.textContent = 'Elogios pra minha mulher';
+      modalBody.innerHTML = '';
+      Object.keys(compliments).forEach(k=>{
+        const el = document.createElement('p'); el.style.margin='8px 0'; el.style.fontWeight='700'; el.textContent = '• ' + compliments[k];
+        modalBody.appendChild(el);
+      });
+      overlay.style.display = 'flex';
+    });
+    document.getElementById('closeModal').addEventListener('click', ()=>overlay.style.display='none');
+    overlay.addEventListener('click', (e)=>{ if(e.target===overlay) overlay.style.display='none' });
+
+    // opcional: selecionar o primeiro chip por padrão
+    chips[0].click();
+  </script>
+</body>
+</html>
